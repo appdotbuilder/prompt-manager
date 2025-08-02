@@ -1,8 +1,17 @@
 
+import { db } from '../db';
+import { tagsTable } from '../db/schema';
 import { type Tag } from '../schema';
 
 export const getTags = async (): Promise<Tag[]> => {
-    // This is a placeholder declaration! Real code should be implemented here.
-    // The goal of this handler is to fetch all tags from the database.
-    return [];
+  try {
+    const results = await db.select()
+      .from(tagsTable)
+      .execute();
+
+    return results;
+  } catch (error) {
+    console.error('Failed to fetch tags:', error);
+    throw error;
+  }
 };
